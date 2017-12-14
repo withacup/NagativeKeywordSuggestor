@@ -22,7 +22,6 @@ const SelectedImage = ({ index, onClick, photo, margin}) => {
   const sx = (100 - ((30 / photo.width) * 100)) / 100;
   const sy = (100 - ((30 / photo.height) * 100)) / 100;
   selectedImgStyle.transform = `translateZ(0px) scale3d(${sx}, ${sy}, 1)`;
-
 	return (
     <div style={{margin, width:photo.width, ...cont}} className={(!photo.selected ? 'not-selected' : '')}>
       <Checkmark selected={photo.selected ? true : false}/>

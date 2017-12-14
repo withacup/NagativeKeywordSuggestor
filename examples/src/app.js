@@ -2,10 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import jsonp from 'jsonp';
 import Measure from 'react-measure';
-import ExampleBasic from './ExampleBasic';
-import ExampleWithLightbox from './ExampleWithLightbox';
 import ExampleCustomComponentSelection from './ExampleCustomComponentSelection';
-import ExampleDynamicLoading from './ExampleDynamicLoading';
 
 class App extends React.Component {
   constructor() {
@@ -33,7 +30,6 @@ class App extends React.Component {
     }, url);
 
     jsonp(url, { name: 'jsonFlickrApi' }, (err, data) => {
-      console.log(data)
       let photos = data.photoset.photo.map(item => {
         let aspectRatio = parseFloat(item.width_o / item.height_o);
         return {
@@ -79,7 +75,7 @@ class App extends React.Component {
 						  columns = 4;
 					  }
             return <div ref={measureRef} className="App">
-                <ExampleCustomComponentSelection columns={columns} photos={this.state.photos.slice(12,18)} />
+                <ExampleCustomComponentSelection columns={columns} photos={this.state.photos} />
               </div>
           }
         }
