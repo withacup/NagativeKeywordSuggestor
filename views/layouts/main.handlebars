@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/anitreemap.css"/>
+<link rel="stylesheet" type="text/css" href="css/kwdisplay.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<style type="text/css">
+	.bs-callout-danger {
+		border-left-color: #ce4844;
+	}
+
+</style>
+</head>
+<body>
+<div id="header"></div>
+<div id="maincontainer">
+<div id="leftcontainer">
+<div class="list-type4">
+<ol>
+
+</ol>
+</div>
+</div>
+<div id="outercontainer"><div id="container"></div></div>
+
+</div>
+
+<div id="footer"></div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/anitreemap.js"></script>
+<script type="text/javascript">
+
+// Assign handlers immediately after making the request,
+// and remember the jqxhr object for this request
+$.getJSON( "json/test.json", function(input) {
+  console.log(input);
+    var tmap=new Anitreemap(input,'container',800,550,function(){
+        var keyword = event.target.innerText;
+        console.log(input[keyword]);
+        var div = document.createElement("SPAN");
+        var br = document.createElement("BR");
+        div.appendChild(document.createTextNode("Text : " + keyword));
+        div.appendChild(br);
+        div.appendChild(document.createTextNode("Score : " + input[keyword]));
+        var gChartDiv = document.createElement("SPAN");
+        gChartDiv.style.display="block";
+        gChartDiv.style.margin = "10px 50px";
+        gChartDiv.id = "gChartDiv";
+        div.appendChild(gChartDiv);
+
+        var script = document.createElement("SCRIPT");
+        script.type = "text/javascript";
+        script.src = "https://ssl.gstatic.com/trends_nrtr/760_RC08/embed_loader.js";
+        script.async = true;
+        script.onload = function () {
+        trends.embed.renderExploreWidgetTo(document.getElementById("gChartDiv"), "TIMESERIES", {"comparisonItem":[{"keyword":keyword,"geo":"","time":"today 12-m"}],"category":0,"property":""}, {"exploreQuery":"q=cnn&date=today 12-m","guestPath":"https://trends.google.com:443/trends/embed/"});
+        }
+
+
+        event.target.innerText="";
+        event.target.appendChild(div);
+        event.target.appendChild(script);
+
+        $("div.tagdiv").unbind();
+
+
+    });
+    tmap.setdiv();
+    tmap.animate();
+
+    jQuery.each(input, function(i, val) {
+        $( ".list-type4 ol" ).append( '<li><a href="#">' + i + '</a></li>' );
+
+    });
+})
+.fail(function(jqXHR, textStatus, errorThrown) { alert('getJSON request failed! ' + textStatus); })
+
+
+</script>
+
+
+</html>
