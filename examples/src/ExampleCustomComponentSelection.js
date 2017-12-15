@@ -24,6 +24,7 @@ class ExampleCustomComponentSelection extends React.Component {
 
     this.state.photos.map(function(photo, index) {
       if (photo.selected) {
+        console.log(photo.de)
         console.log("image " + index + " selected")
       }
     }
