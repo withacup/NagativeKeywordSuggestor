@@ -3,9 +3,13 @@ var JSX = require('node-jsx').install(),
 
 module.exports = {
 
-  index: function(req, res) {
+  show: function(req, res) {
       // Render our 'home' template
-      res.render('home');
+      res.render('main.handlebars');
+  },
+  select: function(req, res) {
+      // Render our 'home' template
+      res.render('home.handlebars');
   }
 
 }

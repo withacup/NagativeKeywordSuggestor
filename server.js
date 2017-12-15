@@ -6,10 +6,10 @@ var express = require('express'),
 
 // Create an express instance and set a port variable
 var app = express();
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 8090;
 
 // Set handlebars as the templating engine
-app.engine('handlebars', exphbs({ defaultLayout: 'main'}));
+app.engine('handlebars', exphbs({}));
 app.set('view engine', 'handlebars');
 
 // Disable etag headers on responses
@@ -20,7 +20,8 @@ app.disable('etag');
 // Create a new ntwitter instance
 
 // Index Route
-app.get('/', routes.index);
+app.get('/', routes.select);
+app.get('/show', routes.show);
 
 // Page Route
 
