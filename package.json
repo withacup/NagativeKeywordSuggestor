@@ -15,7 +15,8 @@
     "url": "https://github.com/neptunian/react-photo-gallery/issues"
   },
   "dependencies": {
-    "prop-types": "~15.6.0"
+    "prop-types": "~15.6.0",
+    "python-shell": "^0.4.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

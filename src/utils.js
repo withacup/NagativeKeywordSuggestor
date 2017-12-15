@@ -1,3 +1,5 @@
+import PythonShell from 'python-shell';
+
 export function round(value, decimals) {
   if (!decimals) decimals = 0;
   return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
@@ -44,3 +46,18 @@ export function computeSizes({ photos, columns, width, margin }) {
   });
   return rowsWithSizes.reduce((acc, row) => [...acc, ...row], []);
 }
+
+export function runPythonScript(fileName, theArgs) {
+  var myPythonScriptPath = "../python-scripts/" + fileName;
+
+  var options = {
+      args: theArgs
+  };
+
+  PythonShell.run(myPythonScriptPath, options, function (err, results) {
+      if (err) throw err;
+      // results is an array consisting of messages collected during execution
+      console.log(results);
+  }); 
+}
+
